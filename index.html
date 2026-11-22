@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MO NASER | بروكسي ويب سريع وآمن</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo for Arabic & Inter for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-black: #050507;
+            --bg-crimson-dark: #2a0408;
+            --bg-crimson-mid: #5c0810;
+            --accent-red: #ff1e2d;
+            --accent-red-glow: rgba(255, 30, 45, 0.45);
+        }
+
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #4d060d 0%, #1c0306 42%, #050507 100%);
+            background-attachment: fixed;
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .font-en {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(15, 7, 9, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 30, 45, 0.22);
+            box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.75);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 30, 45, 0.5);
+        }
+
+        /* Neon Glow Effects */
+        .brand-glow {
+            text-shadow: 0 0 25px rgba(255, 30, 45, 0.65), 0 0 50px rgba(185, 12, 24, 0.4);
+        }
+
+        .btn-crimson {
+            background: linear-gradient(135deg, #ff1e2d 0%, #990914 100%);
+            box-shadow: 0 4px 20px rgba(255, 30, 45, 0.4);
+            transition: all 0.25s ease;
+        }
+
+        .btn-crimson:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 28px rgba(255, 30, 45, 0.65);
+            filter: brightness(1.08);
+        }
+
+        .btn-crimson:active {
+            transform: translateY(0);
+        }
+
+        .input-glow:focus-within {
+            border-color: #ff1e2d;
+            box-shadow: 0 0 0 3px rgba(255, 30, 45, 0.2), 0 0 25px rgba(255, 30, 45, 0.25);
+        }
+
+        /* Custom Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #ff1e2d;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #c8101e;
+        }
+
+        /* Animated Background Grid */
+        .bg-grid {
+            background-size: 42px 42px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 30, 45, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 30, 45, 0.05) 1px, transparent 1px);
+        }
+
+        /* Spinner */
+        @keyframes spin-glow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .crimson-spinner {
+            border: 3px solid rgba(255, 30, 45, 0.15);
+            border-top-color: #ff1e2d;
+            border-radius: 50%;
+            animation: spin-glow 0.85s linear infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070709;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5c0810;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff1e2d;
+        }
+    </style>
+</head>
+<body class="bg-grid flex flex-col justify-between selection:bg-red-600 selection:text-white">
+
+    <!-- ==================== LANDING VIEW ==================== -->
+    <div id="landing-view" class="flex-1 flex flex-col">
+        
+        <!-- Top Navbar -->
+        <header class="w-full border-b border-red-950/60 bg-black/50 backdrop-blur-md sticky top-0 z-30">
+            <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" onclick="resetToHome(); return false;" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-red-950 flex items-center justify-center border border-red-500/40 shadow-lg shadow-red-900/40 group-hover:scale-105 transition">
+                        <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-en font-black text-xl tracking-wider text-white group-hover:text-red-400 transition">MO NASER</span>
+                        <span class="block text-[11px] text-red-400/90 -mt-1 font-semibold">WEB PROXY</span>
+                    </div>
+                </a>
+
+                <!-- Direct Contact Buttons in Header -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="https://wa.me/201090950617" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/70 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-semibold transition">
+                        <i class="fa-brands fa-whatsapp text-base text-emerald-400"></i>
+                        <span class="hidden sm:inline">واتساب</span>
+                    </a>
+                    <a href="https://t.me/+201090950617" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center gap-2 px-3 py-2 rounded-xl bg-sky-950/60 hover:bg-sky-900/70 border border-sky-500/30 text-sky-300 text-xs sm:text-sm font-semibold transition">
+                        <i class="fa-brands fa-telegram text-base text-sky-400"></i>
+                        <span class="hidden sm:inline">تيليجرام</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Main Section -->
+        <main class="flex-1 max-w-5xl w-full mx-auto px-4 pt-10 pb-16 flex flex-col items-center text-center">
+            
+            <!-- Status Pill -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-950/70 border border-red-500/30 text-red-300 text-xs sm:text-sm font-medium mb-6 shadow-md">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                <span>خوادم البروكسي نشطة ومشفرة بالكامل • 100% مجاني</span>
+            </div>
+
+            <!-- Main Brand Title -->
+            <h1 class="font-en font-black text-5xl sm:text-7xl tracking-tight text-white brand-glow mb-3">
+                MO <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-rose-600">NASER</span>
+            </h1>
+
+            <!-- Tagline -->
+            <p class="text-base sm:text-xl text-gray-300 max-w-2xl mb-2 font-semibold">
+                تصفح سريع وآمن بدون قيود أو تتبع
+            </p>
+            <p class="font-en text-xs sm:text-sm text-red-300/80 mb-8 tracking-wide">
+                Fast, Encrypted & Private Web Proxy — Powered by MO NASER
+            </p>
+
+            <!-- Proxy Search / URL Input Box -->
+            <div class="w-full max-w-3xl glass-card rounded-2xl p-3 sm:p-4 mb-6">
+                <form id="proxy-form" class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex-1 flex items-center bg-black/75 border border-red-900/60 rounded-xl px-4 py-3 input-glow transition">
+                        <i class="fa-solid fa-globe text-red-500 ml-3 text-lg"></i>
+                        <input 
+                            type="text" 
+                            id="url-input" 
+                            dir="ltr"
+                            placeholder="أدخل رابط الموقع أو ابحث هنا... (مثال: wikipedia.org)" 
+                            class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none text-sm sm:text-base font-en"
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="button" id="clear-input-btn" onclick="clearUrlInput()" class="hidden text-gray-500 hover:text-red-400 px-2 transition" title="مسح">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="btn-crimson text-white font-bold px-7 py-3.5 rounded-xl flex items-center justify-center gap-2 text-base cursor-pointer shrink-0">
+                        <span>تصفح الآن</span>
+                        <span class="font-en text-xs opacity-90">(Go)</span>
+                        <i class="fa-solid fa-arrow-left text-sm"></i>
+                    </button>
+                </form>
+
+                <!-- Proxy Mode Toggles -->
+                <div class="mt-4 pt-3 border-t border-red-950/60 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-300">
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" id="opt-encrypt" checked class="accent-red-600 w-4 h-4 rounded">
+                        <span><i class="fa-solid fa-lock text-red-400 ml-1"></i> تشفير الرابط (Encrypt URL)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" id="opt-clean" checked class="accent-red-600 w-4 h-4 rounded">
+                        <span><i class="fa-solid fa-broom text-red-400 ml-1"></i> وضع التصفح النظيف (Clean View)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" id="opt-rewrite" checked class="accent-red-600 w-4 h-4 rounded">
+                        <span><i class="fa-solid fa-code-branch text-red-400 ml-1"></i> إعادة توجيه الروابط تلقائياً</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Quick Access Bookmarks -->
+            <div class="w-full max-w-3xl mb-14">
+                <p class="text-xs text-gray-400 mb-3 font-semibold">
+                    <i class="fa-solid fa-bolt text-red-500 ml-1"></i> وصول سريع للمواقع الشائعة:
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
+                    <button onclick="launchProxy('https://ar.wikipedia.org')" class="glass-card rounded-xl p-3 flex flex-col items-center gap-2 hover:bg-red-950/40 transition cursor-pointer group">
+                        <i class="fa-brands fa-wikipedia-w text-xl text-gray-200 group-hover:text-red-400 transition"></i>
+                        <span class="font-en text-xs font-semibold text-gray-300">Wikipedia</span>
+                    </button>
+                    <button onclick="launchProxy('https://html.duckduckgo.com/html/')" class="glass-card rounded-xl p-3 flex flex-col items-center gap-2 hover:bg-red-950/40 transition cursor-pointer group">
+                        <i class="fa-solid fa-magnifying-glass text-xl text-orange-400 group-hover:text-red-400 transition"></i>
+                        <span class="font-en text-xs font-semibold text-gray-300">DuckDuckGo</span>
+                    </button>
+                    <button onclick="launchProxy('https://www.bing.com')" class="glass-card rounded-xl p-3 flex flex-col items-center gap-2 hover:bg-red-950/40 transition cursor-pointer group">
+                        <i class="fa-brands fa-microsoft text-xl text-sky-400 group-hover:text-red-400 transition"></i>
+                        <span class="font-en text-xs font-semibold text-gray-300">Bing</span>
+                    </button>
+                    <button onclick="launchProxy('https://github.com')" class="glass-card rounded-xl p-3 flex flex-col items-center gap-2 hover:bg-red-950/40 transition cursor-pointer group">
+                        <i class="fa-brands fa-github text-xl text-white group-hover:text-red-400 transition"></i>
+                        <span class="font-en text-xs font-semibold text-gray-300">GitHub</span>
+                    </button>
+                    <button onclick="launchProxy('https://old.reddit.com')" class="glass-card rounded-xl p-3 flex flex-col items-center gap-2 hover:bg-red-950/40 transition cursor-pointer group">
+                        <i class="fa-brands fa-reddit-alien text-xl text-red-500 group-hover:text-red-400 transition"></i>
+                        <span class="font-en text-xs font-semibold text-gray-300">Reddit</span>
+                    </button>
+                    <button onclick="launchProxy('https://www.bbc.com/arabic')" class="glass-card rounded-xl p-3 flex flex-col items-center gap-2 hover:bg-red-950/40 transition cursor-pointer group">
+                        <i class="fa-solid fa-newspaper text-xl text-rose-400 group-hover:text-red-400 transition"></i>
+                        <span class="font-en text-xs font-semibold text-gray-300">BBC Arabic</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4 mb-14 text-right">
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-11 h-11 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 text-xl mb-4">
+                        <i class="fa-solid fa-user-secret"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2">خصوصية كاملة وإخفاء الهوية</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        يتيح لك بروكسي <span class="font-en text-red-400 font-semibold">MO NASER</span> تصفح المواقع دون كشف عنوانك الحقيقي أو ترك أثر في سجل الشبكة المحلية.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-11 h-11 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 text-xl mb-4">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2">سرعة فائقة وتبديل تلقائي</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        يعمل المحرك بنظام بوابات متعددة الذكاء للانتقال التلقائي لأسرع خادم متاح وضمان فتح الصفحات بسلاسة.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-11 h-11 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 text-xl mb-4">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2">بدون تحميل أو إعدادات</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        يعمل مباشرة من المتصفح على الهاتف والكمبيوتر بدون الحاجة لتثبيت أي برامج VPN أو إضافات خارجية.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contact & Support Card -->
+            <div class="w-full max-w-3xl glass-card rounded-2xl p-6 sm:p-8 border-red-500/30 relative overflow-hidden">
+                <div class="absolute -top-20 -left-20 w-44 h-44 bg-red-600/15 rounded-full blur-3xl pointer-events-none"></div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white mb-2">تواصل مع الدعم الفني والإدارة</h2>
+                <p class="text-sm text-gray-400 mb-6">للاستفسارات أو طلبات المواقع الخاصة، تواصل مباشرة مع <span class="font-en text-red-400 font-bold">MO NASER</span> عبر واتساب أو تيليجرام:</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- WhatsApp Card -->
+                    <a href="https://wa.me/201090950617" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-emerald-950/80 to-black/80 border border-emerald-500/40 hover:border-emerald-400 transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-xs text-emerald-300 font-semibold">تواصل واتساب مباشر</span>
+                                <span class="font-en font-bold text-base sm:text-lg text-white tracking-wider" dir="ltr">01090950617</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-left text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                    </a>
+
+                    <!-- Telegram Card -->
+                    <a href="https://t.me/+201090950617" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-sky-950/80 to-black/80 border border-sky-500/40 hover:border-sky-400 transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-400 text-2xl group-hover:scale-110 transition">
+                                <i class="fa-brands fa-telegram"></i>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-xs text-sky-300 font-semibold">تواصل تيليجرام مباشر</span>
+                                <span class="font-en font-bold text-base sm:text-lg text-white tracking-wider" dir="ltr">01090950617</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-left text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-red-950/70 bg-black/80 py-6 px-4 text-center">
+            <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-400">
+                <div class="flex items-center gap-2">
+                    <span class="font-en font-black text-white">MO <span class="text-red-500">NASER</span></span>
+                    <span>— جميع الحقوق محفوظة &copy; 2026</span>
+                </div>
+                <div class="flex items-center gap-4 font-en" dir="ltr">
+                    <a href="https://wa.me/201090950617" target="_blank" class="hover:text-emerald-400 transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-emerald-500"></i> 01090950617
+                    </a>
+                    <span class="text-gray-700">|</span>
+                    <a href="https://t.me/+201090950617" target="_blank" class="hover:text-sky-400 transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-telegram text-sky-500"></i> 01090950617
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ==================== PROXY BROWSER VIEW ==================== -->
+    <div id="browser-view" class="hidden fixed inset-0 z-50 flex flex-col bg-[#050507]">
+        
+        <!-- Top Floating Control Bar -->
+        <div id="proxy-topbar" class="bg-gradient-to-r from-[#09090c] via-[#2b0408] to-[#09090c] border-b border-red-600/40 px-3 py-2 flex items-center gap-2 shadow-xl transition-all duration-300">
+            <!-- Brand Badge -->
+            <button onclick="resetToHome()" class="flex items-center gap-2 bg-red-600/20 hover:bg-red-600/35 border border-red-500/40 px-3 py-1.5 rounded-lg text-white shrink-0 cursor-pointer transition" title="الصفحة الرئيسية">
+                <i class="fa-solid fa-shield-halved text-red-500"></i>
+                <span class="font-en font-black text-xs sm:text-sm tracking-wide">MO NASER</span>
+            </button>
+
+            <!-- Navigation Buttons -->
+            <div class="flex items-center gap-1 shrink-0">
+                <button onclick="goBack()" id="btn-back" disabled class="w-8 h-8 rounded-lg bg-black/50 hover:bg-red-950/60 disabled:opacity-35 text-gray-200 flex items-center justify-center border border-red-900/40 cursor-pointer transition" title="رجوع">
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+                <button onclick="reloadProxy()" class="w-8 h-8 rounded-lg bg-black/50 hover:bg-red-950/60 text-gray-200 flex items-center justify-center border border-red-900/40 cursor-pointer transition" title="إعادة تحميل">
+                    <i class="fa-solid fa-rotate-right text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Active URL Bar -->
+            <form id="topbar-form" class="flex-1 flex items-center bg-black/80 border border-red-800/50 rounded-lg px-3 py-1.5 input-glow">
+                <i class="fa-solid fa-lock text-emerald-400 text-xs ml-2"></i>
+                <input type="text" id="topbar-url" dir="ltr" class="w-full bg-transparent text-xs sm:text-sm text-gray-100 font-en focus:outline-none" placeholder="https://...">
+                <button type="submit" class="text-red-400 hover:text-red-300 text-xs font-bold px-2 font-en cursor-pointer">GO</button>
+            </form>
+
+            <!-- Quick Support & Collapse -->
+            <div class="flex items-center gap-1.5 shrink-0">
+                <a href="https://wa.me/201090950617" target="_blank" class="hidden md:flex w-8 h-8 rounded-lg bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 items-center justify-center hover:bg-emerald-900/70 transition" title="واتساب: 01090950617">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+                <button onclick="toggleTopbar(false)" class="w-8 h-8 rounded-lg bg-black/50 hover:bg-red-950/60 text-gray-300 flex items-center justify-center border border-red-900/40 cursor-pointer transition" title="إخفاء الشريط">
+                    <i class="fa-solid fa-chevron-up text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mini Expand Button when Topbar is Hidden -->
+        <button id="show-topbar-btn" onclick="toggleTopbar(true)" class="hidden fixed top-2 left-1/2 -translate-x-1/2 z-50 bg-red-600/90 hover:bg-red-600 text-white text-xs font-en font-bold px-4 py-1.5 rounded-full shadow-lg border border-red-400/50 flex items-center gap-2 cursor-pointer backdrop-blur-md">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>MO NASER</span>
+            <i class="fa-solid fa-chevron-down text-[10px]"></i>
+        </button>
+
+        <!-- Main Content Area (Iframe + Overlays) -->
+        <div class="relative flex-1 w-full bg-white overflow-hidden">
+            
+            <!-- Proxied Page Iframe -->
+            <iframe id="proxy-frame" class="w-full h-full border-0 bg-white" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>
+
+            <!-- Loading Overlay -->
+            <div id="loading-overlay" class="hidden absolute inset-0 bg-[#070709]/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-20">
+                <div class="w-16 h-16 crimson-spinner mb-5"></div>
+                <h3 class="font-en font-black text-2xl text-white brand-glow mb-1">MO NASER PROXY</h3>
+                <p id="loading-status" class="text-sm text-red-300 font-semibold mb-2">جاري الاتصال بالخادم المشفر وجلب الصفحة...</p>
+                <p id="loading-target" class="font-en text-xs text-gray-500 max-w-md truncate" dir="ltr"></p>
+            </div>
+
+            <!-- Error Overlay -->
+            <div id="error-overlay" class="hidden absolute inset-0 bg-gradient-to-b from-[#1a0306] to-[#050507] flex flex-col items-center justify-center p-6 text-center z-20">
+                <div class="w-16 h-16 rounded-2xl bg-red-600/20 border border-red-500/40 flex items-center justify-center text-red-500 text-3xl mb-4">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">تعذر تحميل الصفحة عبر البروكسي</h3>
+                <p id="error-message" class="text-sm text-gray-400 max-w-md mb-6 leading-relaxed">
+                    قد يكون هذا الموقع محمياً ضد التضمين المباشر أو استغرق الخادم وقتاً طويلاً للاستجابة.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button onclick="reloadProxy()" class="btn-crimson text-white font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>إعادة المحاولة</span>
+                    </button>
+                    <button onclick="resetToHome()" class="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-gray-200 font-semibold text-sm border border-white/15 cursor-pointer transition">
+                        العودة للرئيسية
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Floating Quick Contact Pill (Bottom Left on Landing) -->
+    <div id="floating-contact" class="fixed bottom-4 left-4 z-40 flex flex-col gap-2">
+        <a href="https://wa.me/201090950617" target="_blank" rel="noopener noreferrer"
+           class="w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-950/80 flex items-center justify-center text-2xl transition hover:scale-110"
+           title="واتساب: 01090950617">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://t.me/+201090950617" target="_blank" rel="noopener noreferrer"
+           class="w-12 h-12 rounded-full bg-sky-600 hover:bg-sky-500 text-white shadow-lg shadow-sky-950/80 flex items-center justify-center text-2xl transition hover:scale-110"
+           title="تيليجرام: 01090950617">
+            <i class="fa-brands fa-telegram"></i>
+        </a>
+    </div>
+
+    <!-- ==================== PROXY ENGINE SCRIPT ==================== -->
+    <script>
+        // State Management
+        let historyStack = [];
+        let currentUrl = '';
+
+        // DOM Elements
+        const landingView = document.getElementById('landing-view');
+        const browserView = document.getElementById('browser-view');
+        const floatingContact = document.getElementById('floating-contact');
+        const urlInput = document.getElementById('url-input');
+        const clearInputBtn = document.getElementById('clear-input-btn');
+        const topbarUrl = document.getElementById('topbar-url');
+        const proxyFrame = document.getElementById('proxy-frame');
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const loadingStatus = document.getElementById('loading-status');
+        const loadingTarget = document.getElementById('loading-target');
+        const errorOverlay = document.getElementById('error-overlay');
+        const errorMessage = document.getElementById('error-message');
+        const btnBack = document.getElementById('btn-back');
+
+        // Multi-Fallback Public CORS/Proxy Gateways
+        const PROXY_GATEWAYS = [
+            {
+                name: 'Gateway Alpha',
+                build: (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+            },
+            {
+                name: 'Gateway Beta',
+                build: (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
+            },
+            {
+                name: 'Gateway Gamma',
+                build: (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+            }
+        ];
+
+        // Input clear button visibility
+        urlInput.addEventListener('input', () => {
+            if (urlInput.value.trim().length > 0) {
+                clearInputBtn.classList.remove('hidden');
+            } else {
+                clearInputBtn.classList.add('hidden');
+            }
+        });
+
+        function clearUrlInput() {
+            urlInput.value = '';
+            clearInputBtn.classList.add('hidden');
+            urlInput.focus();
+        }
+
+        // Normalize user input into valid URL or Search Query
+        function normalizeTargetUrl(rawInput) {
+            let trimmed = rawInput.trim();
+            if (!trimmed) return null;
+
+            // Check if it looks like a domain or URL
+            const hasSpaces = /\s/.test(trimmed);
+            const hasDot = trimmed.includes('.');
+
+            if (!hasSpaces && hasDot) {
+                if (!/^https?:\/\//i.test(trimmed)) {
+                    return 'https://' + trimmed;
+                }
+                return trimmed;
+            } else {
+                // Treat plain keywords as DuckDuckGo HTML search (proxy-friendly)
+                return `https://html.duckduckgo.com/html/?q=${encodeURIComponent(trimmed)}`;
+            }
+        }
+
+        // Form Submissions
+        document.getElementById('proxy-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const target = normalizeTargetUrl(urlInput.value);
+            if (target) launchProxy(target);
+        });
+
+        document.getElementById('topbar-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const target = normalizeTargetUrl(topbarUrl.value);
+            if (target) launchProxy(target);
+        });
+
+        // Fetch with timeout helper
+        async function fetchWithTimeout(resource, timeoutMs = 11000) {
+            const controller = new AbortController();
+            const id = setTimeout(() => controller.abort(), timeoutMs);
+            try {
+                const response = await fetch(resource, { signal: controller.signal });
+                clearTimeout(id);
+                return response;
+            } catch (err) {
+                clearTimeout(id);
+                throw err;
+            }
+        }
+
+        // Main Proxy Launch Function
+        async function launchProxy(rawUrl, addToHistory = true) {
+            const targetUrl = normalizeTargetUrl(rawUrl);
+            if (!targetUrl) return;
+
+            // Update History
+            if (addToHistory && currentUrl && currentUrl !== targetUrl) {
+                historyStack.push(currentUrl);
+            }
+            currentUrl = targetUrl;
+            btnBack.disabled = historyStack.length === 0;
+
+            // Switch UI to Browser Mode
+            landingView.classList.add('hidden');
+            floatingContact.classList.add('hidden');
+            browserView.classList.remove('hidden');
+            
+            // Update UI states
+            topbarUrl.value = targetUrl;
+            loadingTarget.textContent = targetUrl;
+            errorOverlay.classList.add('hidden');
+            loadingOverlay.classList.remove('hidden');
+
+            let htmlContent = null;
+            let lastError = null;
+
+            // Try gateways sequentially until one succeeds
+            for (let i = 0; i < PROXY_GATEWAYS.length; i++) {
+                const gateway = PROXY_GATEWAYS[i];
+                loadingStatus.textContent = `جاري الاتصال عبر ${gateway.name} (${i + 1}/${PROXY_GATEWAYS.length})...`;
+                try {
+                    const proxyEndpoint = gateway.build(targetUrl);
+                    const res = await fetchWithTimeout(proxyEndpoint, 12000);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const text = await res.text();
+                    if (text && text.length > 50) {
+                        htmlContent = text;
+                        break;
+                    }
+                } catch (err) {
+                    lastError = err;
+                }
+            }
+
+            if (!htmlContent) {
+                loadingOverlay.classList.add('hidden');
+                errorMessage.textContent = `تعذر الوصول إلى (${targetUrl}) عبر البوابات المتاحة حالياً. جرب موقعاً آخر أو أعد المحاولة.`;
+                errorOverlay.classList.remove('hidden');
+                return;
+            }
+
+            // Rewrite HTML so links & forms route back through MO NASER proxy
+            const processedHtml = rewriteHtmlForProxy(htmlContent, targetUrl);
+            proxyFrame.srcdoc = processedHtml;
+
+            // Hide loading shortly after frame renders
+            setTimeout(() => {
+                loadingOverlay.classList.add('hidden');
+            }, 400);
+        }
+
+        // Parse & Rewrite HTML Content
+        function rewriteHtmlForProxy(rawHtml, baseUrl) {
+            try {
+                const urlObj = new URL(baseUrl);
+                const origin = urlObj.origin;
+                const autoRewrite = document.getElementById('opt-rewrite').checked;
+                const cleanView = document.getElementById('opt-clean').checked;
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(rawHtml, 'text/html');
+
+                // Remove frame-busting meta CSP tags if any
+                doc.querySelectorAll('meta[http-equiv="Content-Security-Policy"], meta[http-equiv="X-Frame-Options"]').forEach(el => el.remove());
+
+                // Optional Clean View: hide common ad containers
+                if (cleanView) {
+                    doc.querySelectorAll('ins.adsbygoogle, [id*="ad-"], [class*="ad-banner"], iframe[src*="doubleclick"]').forEach(el => el.remove());
+                }
+
+                // Inject <base> tag so relative CSS, images, and fonts resolve properly
+                let baseEl = doc.querySelector('base');
+                if (!baseEl) {
+                    baseEl = doc.createElement('base');
+                    doc.head.prepend(baseEl);
+                }
+                baseEl.setAttribute('href', baseUrl);
+
+                // Inject Interceptor Script to capture link clicks & form submits
+                if (autoRewrite) {
+                    const interceptorScript = doc.createElement('script');
+                    interceptorScript.textContent = `
+                        (function() {
+                            const BASE_URL = ${JSON.stringify(baseUrl)};
+                            function resolveUrl(rel) {
+                                try { return new URL(rel, BASE_URL).href; } catch(e) { return null; }
+                            }
+                            document.addEventListener('click', function(e) {
+                                const anchor = e.target.closest('a');
+                                if (!anchor) return;
+                                const href = anchor.getAttribute('href');
+                                if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+                                const fullUrl = resolveUrl(href);
+                                if (fullUrl && fullUrl.startsWith('http')) {
+                                    e.preventDefault();
+                                    window.parent.postMessage({ type: 'MONASER_NAVIGATE', url: fullUrl }, '*');
+                                }
+                            }, true);
+
+                            document.addEventListener('submit', function(e) {
+                                const form = e.target;
+                                if (!form || form.tagName !== 'FORM') return;
+                                const action = form.getAttribute('action') || BASE_URL;
+                                const method = (form.getAttribute('method') || 'GET').toUpperCase();
+                                if (method === 'GET') {
+                                    const fullUrl = resolveUrl(action);
+                                    if (fullUrl) {
+                                        e.preventDefault();
+                                        const u = new URL(fullUrl);
+                                        const formData = new FormData(form);
+                                        for (const [k, v] of formData.entries()) {
+                                            u.searchParams.set(k, v);
+                                        }
+                                        window.parent.postMessage({ type: 'MONASER_NAVIGATE', url: u.href }, '*');
+                                    }
+                                }
+                            }, true);
+                        })();
+                    `;
+                    doc.body.appendChild(interceptorScript);
+                }
+
+                return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+            } catch (e) {
+                return rawHtml;
+            }
+        }
+
+        // Listen for Navigation Messages from inside the Proxied Iframe
+        window.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'MONASER_NAVIGATE' && event.data.url) {
+                launchProxy(event.data.url, true);
+            }
+        });
+
+        // Navigation Controls
+        function goBack() {
+            if (historyStack.length === 0) return;
+            const prevUrl = historyStack.pop();
+            btnBack.disabled = historyStack.length === 0;
+            launchProxy(prevUrl, false);
+        }
+
+        function reloadProxy() {
+            if (currentUrl) {
+                launchProxy(currentUrl, false);
+            }
+        }
+
+        function resetToHome() {
+            browserView.classList.add('hidden');
+            landingView.classList.remove('hidden');
+            floatingContact.classList.remove('hidden');
+            proxyFrame.srcdoc = '';
+            currentUrl = '';
+            historyStack = [];
+            btnBack.disabled = true;
+        }
+
+        function toggleTopbar(show) {
+            const topbar = document.getElementById('proxy-topbar');
+            const showBtn = document.getElementById('show-topbar-btn');
+            if (show) {
+                topbar.classList.remove('hidden');
+                showBtn.classList.add('hidden');
+            } else {
+                topbar.classList.add('hidden');
+                showBtn.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
